@@ -14,10 +14,10 @@ def LoadInfoPatients():
         core.crearInfo("patients.json",dictPatients)
 
 def MainMenu():
-    os.system("cls")
+    os.system("clear")
     isCliRun = True
     os.system("pause")
-    os.system("cls")
+    os.system("clear")
     global contId
     global showPatientSelected
     print("╔═══════════════════════════════════════════╗")
@@ -33,12 +33,14 @@ def MainMenu():
     print("╚═══════════════════════════════════════════╝")
     opcion =int(input("-->  "))
     if (opcion == 1):
-        contId += 1
+        if (len(dictPatients['data']) >=1):
+            contId = dictPatients['data'][-1]['id']+1
+        else:
+            contId = 1
 
-        print("Ingrese los datos del paciente:")
-        name = validateName()
-        age = validateAge()
-        owner = validateOwner()
+        name = validations.validateName()
+        age = validations.validateAge()
+        owner = validations.validateOwner()
 
         animalType = typeOfPatient()
 
@@ -60,6 +62,7 @@ def MainMenu():
     elif (opcion == 3):
         if showPatientSelected:
             print(showPatientSelected)
+            input('Presione una tecla para continuar... ')
         else:
             print("No se ha seleccionado ningún paciente.")
     elif (opcion == 4):
@@ -205,29 +208,4 @@ def breedOfPatient(saveType):
             print("Opción no válida")
             breedOfPatient(saveType)
 
-def validateAge():
-    while True:
-        age = input("Ingrese la Edad del paciente: ")
-        if not age.isdigit():
-            print("La edad debe ser un número entero válido")
-        elif int(age) < 0:
-            print("La edad debe ser positiva")
-        else:
-            return age
 
-
-def validateName():
-    while True:
-        name = input("Ingrese el Nombre del paciente: ").upper()
-        if name == "":
-            print("El nombre no puede estar vacío")
-        else:
-            return name
-
-def validateOwner():
-    while True:
-        owner = input("Ingrese el Nombre del dueño del paciente: ").upper()
-        if owner == "":
-            print("El nombre no puede estar vacío")
-        else:
-            return owner
