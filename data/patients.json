@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "SIZA",
+            "type": "Perro",
+            "breed": "Pug",
+            "age": "19",
+            "owner": "SANTI"
+        },
+        {
+            "id": 1,
+            "name": "OLA",
+            "type": "Gato",
+            "breed": "Persa",
+            "age": "2",
+            "owner": "SEBAS"
+        },
+        {
+            "id": 1,
+            "name": "EFE",
+            "type": "Ave",
+            "breed": "Canario",
+            "age": "7",
+            "owner": "CAMILO"
+        }
+    ]
+}

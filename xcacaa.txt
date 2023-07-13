@@ -1,0 +1,35 @@
+        while True:
+            idpatient = input("Ingrese el Id del paciente: ")
+            idExistente = False
+            
+            for i in dictPatients["data"]:
+                if (i["id"] == idpatient):
+                    idExistente = True
+                    break
+
+            if (idExistente):
+                print("El Id ya existe, ingrese otro")
+            else:
+                data = {
+                    "id":idpatient,
+                    "nombre":input("Ingrese el Nombre del paciente: "),
+                    "email":input("Ingrese el Email del paciente: "),
+                }
+                core.crearInfo("patients.json",data)
+                dictPatients["data"].append(data)
+                break
+
+
+        patientWanted = input("Ingrese el Id del paciente: ")
+        patientFound = False
+        for i in dictPatients["data"]:
+            if (i["id"] == patientWanted):
+                print("Id: ",i["id"])
+                print("Nombre: ",i["nombre"].upper())
+                print("Email: ",i["email"])
+                patientFound = True
+                break
+
+        if (not patientFound):
+            print("No se encontró ningún paciente con el ID especificado.")
+        input("Presione una tecla para continuar...")
