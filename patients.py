@@ -27,7 +27,7 @@ def MainMenu():
     print("║                                           ║")
     print("║    1. Agregar Paciente                    ║")
     print("║    2. Buscar Paciente                     ║")
-    print("║    3. Mostrar Información de un Paciente  ║")
+    print("║    3. Mostrar Información de el Paciente  ║")
     print("║    4. Volver al menú principal            ║")
     print("║                                           ║")
     print("╚═══════════════════════════════════════════╝")
@@ -51,6 +51,7 @@ def MainMenu():
             'breed': breedOfPatient(animalType),
             'age': age,
             'owner': owner,
+            'clinicalHistory': []
         }
 
         core.crearInfo("patients.json",data)
@@ -207,5 +208,3 @@ def breedOfPatient(saveType):
         else:
             print("Opción no válida")
             breedOfPatient(saveType)
-
-
