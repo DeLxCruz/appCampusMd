@@ -8,7 +8,6 @@ def validateAge():
         else:
             return age
 
-
 def validateName():
     while True:
         name = input("Ingrese el Nombre del paciente: ").upper()
@@ -24,16 +23,6 @@ def validateOwner():
             print("El nombre no puede estar vacío")
         else:
             return owner
-
-def validateIdVet():
-    while True:
-        idVet = input("Ingrese el ID del Veterinario: ")
-        if not idVet.isdigit():
-            print("El ID debe ser un número entero válido")
-        elif int(idVet) < 0:
-            print("El ID debe ser positivo")
-        else:
-            return idVet
         
 def validateFullNameVet():
     while True:

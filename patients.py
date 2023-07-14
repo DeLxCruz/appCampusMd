@@ -31,7 +31,12 @@ def MainMenu():
     print("║    4. Volver al menú principal            ║")
     print("║                                           ║")
     print("╚═══════════════════════════════════════════╝")
-    opcion =int(input("-->  "))
+    try:
+        opcion =int(input("-->  "))
+    except ValueError:
+        print("Opción no válida. Por favor seleccione una opción válida.")
+        MainMenu()
+        
     if (opcion == 1):
         if (len(dictPatients['data']) >=1):
             contId = dictPatients['data'][-1]['id']+1
@@ -61,18 +66,22 @@ def MainMenu():
     elif (opcion == 2):
         showPatientSelected = searchPatient()
     elif (opcion == 3):
-        if showPatientSelected:
+        if showPatientSelected != "":
             print(showPatientSelected)
             input('Presione una tecla para continuar... ')
         else:
             print("No se ha seleccionado ningún paciente.")
+            input('Presione una tecla para continuar... ')
     elif (opcion == 4):
         isCliRun = False
+    else:
+        print("Opción no válida")
     if (isCliRun):
         MainMenu()
 
 def searchPatient():
     while True:
+        os.system("clear")
         print("╔═══════════════════════════════════════════╗")
         print("║          ¡BÚSQUEDA DE PACIENTES!          ║")
         print("╠═══════════════════════════════════════════╣")
@@ -83,7 +92,13 @@ def searchPatient():
         print("║    [V] Volver al Menú Principal           ║")
         print("║                                           ║")
         print("╚═══════════════════════════════════════════╝")
-        option = input("-->  ")
+        
+        try:
+            option = input("-->  ")
+        except ValueError:
+            print("Opción no válida. Por favor seleccione una opción válida.")
+            input("Presione ENTER para continuar...")
+        
         if (option == 'N' or option == 'n'):
             nameWanted = input("Ingrese el Nombre del paciente: ").upper()
             nameFound = False

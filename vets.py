@@ -1,11 +1,13 @@
 import core
 import validations
 import os
+from datetime import date
+
 
 dictVets = {"data":[]}
 showVetselected = ""
 
-def LoadInfovets():
+def LoadInfoVets():
     global dictVets
     if (core.checkFile("vets.json")):
         dictVets = core.LoadInfo("vets.json")
@@ -29,14 +31,21 @@ def MainMenu():
     print("║    4. Volver al menú principal                ║")
     print("║                                               ║")
     print("╚═══════════════════════════════════════════════╝")
-    opcion =int(input("-->  "))
+
+    try:
+        opcion =int(input("-->  "))
+    except ValueError:
+        print("Opción no válida. Por favor, seleccione una opción válida.")
+        MainMenu()
+
     if (opcion == 1):
 
         idVet = validations.validateIdVet()
         fullNameVet = validations.validateFullNameVet()
         age = validations.validateAge()
-        professionalTitle = True
-        specialty = True
+        professionalTitle = 'Doctor en Medicina Veterinaria'
+        specialty = chooseSpecialty()
+        regisrationDate = str(date.today())
 
         data = {
             'id': idVet,
@@ -44,8 +53,12 @@ def MainMenu():
             'age': age,
             'professionalTitle': professionalTitle,
             'specialty': specialty,
-            'clinicalHistory': []
+            'regisration date': regisrationDate,
+            'schedule': "",
+            'hours': ""
         }
+
+        setSchedule(data)
 
         core.crearInfo("vets.json",data)
         dictVets["data"].append(data)
@@ -61,11 +74,14 @@ def MainMenu():
             print("No se ha seleccionado ningún Veterinario.")
     elif (opcion == 4):
         isCliRun = False
+    else:
+        print("Opción no válida")
     if (isCliRun):
         MainMenu()
 
 def searchVet():
     while True:
+        os.system("clear")
         print("╔═══════════════════════════════════════════════╗")
         print("║           ¡GESTIÓN DE VETERIANRIOS!           ║")
         print("╠═══════════════════════════════════════════════╣")
@@ -124,4 +140,55 @@ def searchVet():
             print("Opción no válida")
             searchVet()
 
-def 
+def validateIdVet():
+    while True:
+        idVet = input("Ingrese el ID del Veterinario: ")
+        for i in dictVets["data"]:
+            if idVet == i['data']['id']:
+                print("El ID ya existe, ingrese uno nuevo")
+            elif not idVet.isdigit():
+                print("El ID debe ser un número entero válido")
+            elif int(idVet) < 0:
+                print("El ID debe ser positivo")
+            else:
+                return idVet
+
+def chooseSpecialty():
+    specialties = ['Cirugía veterinaria', 'Oncología Veterinaria', 'Dermatología Veterinaria', 'Medicina Interna Veterinaria', 'Oftalmología Veterinaria', 'Odontología Veterinaria', 'Neurología Veterinaria', 'Cardiología Veterinaria', 'Anestesiología Veterinaria', 'Rehabilitación y fisioterapia veterinaria', 'Nutrición Veterinaria', 'Etología Veterinaria']
+
+    for i in range(len(specialties)):
+        print(f"{i + 1}. {specialties[i]}")
+
+    while True:
+        try:
+            option = int(input("Seleccione la especialidad: "))
+            if option >= 1 and option <= len(specialties):
+                print(f"La especialidad seleccionada es: {specialties[option - 1]}")
+                return specialties[option - 1]
+            else:
+                print("Opción no válida")
+        except ValueError:
+            print("Opción no válida")
+
+def setSchedule(data):
+    morning = "mañana"
+    afternoon = "tarde"
+    morningHours = ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30"]
+    afternoonHours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", '17:30']
+
+    while True:
+        print("Seleccione el horario: ")
+        print("1. Mañana")
+        print("2. Tarde")
+        try:
+            option = int(input("-->  "))
+            if option == 1:
+                data["schedule"] = morning
+                data["hours"] = morningHours
+                break
+            elif option == 2:
+                data["schedule"] = afternoon
+                data["hours"] = afternoonHours
+                break
+        except ValueError:
+            print("Opción no válida")
