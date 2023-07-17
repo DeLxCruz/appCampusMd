@@ -1,3 +1,13 @@
 {
-    "data": []
+    "data": [
+        {
+            "id": 1,
+            "name": "DWD",
+            "type": "Perro",
+            "breed": "Labrador",
+            "age": "5",
+            "owner": "DSA",
+            "clinicalHistory": []
+        }
+    ]
 }

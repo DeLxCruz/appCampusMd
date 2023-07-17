@@ -40,7 +40,7 @@ def MainMenu():
 
     if (opcion == 1):
 
-        idVet = validations.validateIdVet()
+        idVet = validateIdVet()
         fullNameVet = validations.validateFullNameVet()
         age = validations.validateAge()
         professionalTitle = 'Doctor en Medicina Veterinaria'
@@ -55,9 +55,8 @@ def MainMenu():
             'specialty': specialty,
             'regisration date': regisrationDate,
             'schedule': "",
-            'hours': ""
+            'hours': "",
         }
-
         setSchedule(data)
 
         core.crearInfo("vets.json",data)
@@ -144,14 +143,17 @@ def validateIdVet():
     while True:
         idVet = input("Ingrese el ID del Veterinario: ")
         for i in dictVets["data"]:
-            if idVet == i['data']['id']:
+            if idVet == i['id']:
                 print("El ID ya existe, ingrese uno nuevo")
+                break
             elif not idVet.isdigit():
                 print("El ID debe ser un número entero válido")
+                break
             elif int(idVet) < 0:
                 print("El ID debe ser positivo")
-            else:
-                return idVet
+                break
+        else:
+            return idVet
 
 def chooseSpecialty():
     specialties = ['Cirugía veterinaria', 'Oncología Veterinaria', 'Dermatología Veterinaria', 'Medicina Interna Veterinaria', 'Oftalmología Veterinaria', 'Odontología Veterinaria', 'Neurología Veterinaria', 'Cardiología Veterinaria', 'Anestesiología Veterinaria', 'Rehabilitación y fisioterapia veterinaria', 'Nutrición Veterinaria', 'Etología Veterinaria']
@@ -171,7 +173,7 @@ def chooseSpecialty():
             print("Opción no válida")
 
 def setSchedule(data):
-    morning = "mañana"
+    morning = "maniana"
     afternoon = "tarde"
     morningHours = ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30"]
     afternoonHours = ["14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", '17:30']

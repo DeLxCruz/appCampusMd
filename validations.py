@@ -13,6 +13,8 @@ def validateName():
         name = input("Ingrese el Nombre del paciente: ").upper()
         if name == "":
             print("El nombre no puede estar vacío")
+        elif name.isdigit():
+            print("El nombre no puede ser un número")
         else:
             return name
 

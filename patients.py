@@ -135,10 +135,10 @@ def searchPatient():
                             print("Opción no válida")
                             searchPatient()
 
-                    if (not breedFound):
-                        print("No se encontró ningún paciente con la raza especificada.")
-                    input("Presione una tecla para continuar...")
-                    break
+            if (not breedFound):
+                print("No se encontró ningún paciente con la raza especificada.")
+                input("Presione una tecla para continuar...")
+                break
 
         elif (option == 'V' or option == 'v'):
                 break

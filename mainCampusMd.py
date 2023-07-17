@@ -33,7 +33,8 @@ if __name__ == "__main__":
             vets.LoadInfoVets()
             vets.MainMenu()
         elif (opcion == 3):
-            pass
+            appointments.LoadInfoAppointments()
+            appointments.MainMenu()
         elif (opcion == 4):
             print("Gracias por usar el sistema :D.")
             isActivate = False
